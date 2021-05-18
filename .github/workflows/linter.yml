@@ -1,0 +1,36 @@
+name: PR validation
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        terraform: ['~0.13.0', '~0.14.0', '~0.15.0']
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install TFLint
+      uses: terraform-linters/setup-tflint@v1
+      with:
+        tflint_version: v0.26.0
+
+    - name: Install Python
+      uses: actions/setup-python@v2
+
+    - name: Install pre-commit
+      run: pip install pre-commit
+
+    - name: Run pre-commit
+      run: pre-commit run --color=always --show-diff-on-failure --all-files

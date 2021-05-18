@@ -12,6 +12,9 @@ The overall architecture looks like the illustration below
 3. Athena provides an SQL interface to the CUR data, using the Data Catalog as its data source
 4. QuickSight visualizes the data returned from querying Athena
 
+<!-- BEGIN_TF_DOCS --->
+<!-- END_TF_DOCS --->
+
 ## References
 
 It is based on [AWS: Query and Visualize AWS Cost and Usage](https://aws.amazon.com/blogs/big-data/query-and-visualize-aws-cost-and-usage-data-using-amazon-athena-and-amazon-quicksight/).
