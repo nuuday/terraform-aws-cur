@@ -1,0 +1,10 @@
+sections:
+  show:
+  - header
+  - requirements
+  - providers
+  - inputs
+  - outputs
+
+sort:
+  enabled: true
