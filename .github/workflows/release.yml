@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        lfs: true
+        ref: master
+
+    - name: Update module docs
+      uses: terraform-docs/gh-actions@main 
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
+        git-push-user-name: cle-robot
+        git-push-user-email: ab5c3b84.tdc.onmicrosoft.com@emea.teams.ms
+        git-commit-message: "chore: update module docs [skip ci]"
