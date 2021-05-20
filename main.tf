@@ -1,7 +1,7 @@
-# Exist only to make the linter think we use the 'aws' provider.
-# Will be removed once we fill in proper resources.
-resource "aws_s3_bucket" "null" {
-  count = 0
+resource "aws_s3_bucket" "cur" {
+  count = var.use_existing_s3_bucket ? 0 : 1
 
-  bucket_prefix = "null"
+  bucket = var.s3_bucket_name
+
+  tags = var.tags
 }

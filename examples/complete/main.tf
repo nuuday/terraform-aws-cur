@@ -4,4 +4,7 @@ terraform {
 
 module "this" {
   source = "../../"
+
+  use_existing_s3_bucket = true
+  s3_bucket_name         = "foo"
 }
