@@ -21,6 +21,12 @@ jobs:
         lfs: true
         token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ${{ matrix.terraform }}
+        terraform_wrapper: false
+
     - name: Install TFLint
       uses: terraform-linters/setup-tflint@v1
       with:
