@@ -17,7 +17,7 @@ The overall architecture looks like the illustration below
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13, < 0.16 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.29 |
 
 ## Providers
