@@ -7,4 +7,4 @@ sections:
   - outputs
 
 sort:
-  enabled: true
+  enabled: false
