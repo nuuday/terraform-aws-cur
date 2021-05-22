@@ -110,6 +110,9 @@ data "aws_iam_policy_document" "crawler_trigger" {
 
 # Pre-create log group for the Lambda function.
 # Otherwise it will be created by Lambda itself with infinite retention.
+#
+# Accept default encryption. This Lambda does not produce sensitive logs.
+# #tfsec:ignore:AWS089
 resource "aws_cloudwatch_log_group" "lambda" {
   name              = "/aws/lambda/${local.lambda_function_name}"
   retention_in_days = var.lambda_log_group_retention_days

@@ -29,6 +29,8 @@ data "aws_kms_key" "s3" {
   key_id = "alias/aws/s3"
 }
 
+# Versioning and logging disabled.
+# tfsec:ignore:AWS077 tfsec:ignore:AWS002
 resource "aws_s3_bucket" "cur" {
   count = var.use_existing_s3_bucket ? 0 : 1
 

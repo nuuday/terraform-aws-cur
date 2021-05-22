@@ -123,6 +123,9 @@ data "aws_iam_policy_document" "crawler" {
 # Anyway, Crawlers will automatically create this Log Group
 # with infinite retention, which is not desirable.
 # This gives module consumers the option of letting this module create it/manage it.
+#
+# Accept default encryption. Crawler logs are not sensitive.
+# #tfsec:ignore:AWS089
 resource "aws_cloudwatch_log_group" "crawler" {
   count = var.glue_crawler_create_log_group ? 1 : 0
 
