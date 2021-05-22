@@ -63,7 +63,7 @@ variable "lambda_log_group_retention_days" {
 }
 
 variable "glue_crawler_create_log_group" {
-  description = "Whether to create a CloudWatch Log Group for the Glue Crawler."
+  description = "Whether to create a CloudWatch Log Group for the Glue Crawler. Crawlers share Log Group, and this gives the option of managing the Log Group with retention through this module."
   type        = bool
   default     = true
 }

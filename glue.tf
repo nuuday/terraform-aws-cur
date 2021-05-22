@@ -117,8 +117,12 @@ data "aws_iam_policy_document" "crawler" {
   }
 }
 
-# Pre-create log group for the Crawler.
-# Otherwise it will be created by the Crawler itself with infinite retention.
+# Optionally pre-create log group for Glue Crawlers.
+# Crawlers share Log Group for whatever reason I do not know.
+#
+# Anyway, Crawlers will automatically create this Log Group
+# with infinite retention, which is not desirable.
+# This gives module consumers the option of letting this module create it/manage it.
 resource "aws_cloudwatch_log_group" "crawler" {
   count = var.glue_crawler_create_log_group ? 1 : 0
 
