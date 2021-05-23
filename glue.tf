@@ -7,8 +7,7 @@ resource "aws_glue_crawler" "this" {
   role          = aws_iam_role.crawler.name
 
   s3_target {
-    #path = "s3://${var.s3_bucket_name}/${var.s3_bucket_prefix}/${var.report_name}/${var.report_name}"
-    path = "s3://${var.s3_bucket_name}/${var.s3_bucket_prefix}/nuuday-hourly/nuuday-hourly"
+    path = "s3://${var.s3_bucket_name}/${var.s3_bucket_prefix}/${var.report_name}/${var.report_name}"
   }
 
   tags = var.tags
