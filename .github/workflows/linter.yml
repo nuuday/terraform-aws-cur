@@ -35,8 +35,10 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v2
 
-    - name: Install pre-commit
-      run: pip install pre-commit
+    - name: Install pre-commit & deps
+      run: |
+        pip install pre-commit
+        curl -L "$(curl -s https://api.github.com/repos/tfsec/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-amd64")" > tfsec && chmod +x tfsec && sudo mv tfsec /usr/bin/
 
     - name: Run pre-commit
       run: pre-commit run --color=always --show-diff-on-failure --all-files
