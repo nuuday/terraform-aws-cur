@@ -1,5 +1,4 @@
 resource "aws_cur_report_definition" "this" {
-  count                      = 0
   report_name                = var.report_name
   time_unit                  = var.report_frequency
   format                     = var.report_format
