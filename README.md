@@ -18,12 +18,15 @@ The overall architecture looks like the illustration below
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13, < 0.16 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.29 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
+| <a name="provider_aws.cur"></a> [aws.cur](#provider\_aws.cur) | ~> 3.29 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.29 |
 
 ## Inputs
@@ -32,6 +35,18 @@ The overall architecture looks like the illustration below
 |------|-------------|------|---------|:--------:|
 | <a name="input_use_existing_s3_bucket"></a> [use\_existing\_s3\_bucket](#input\_use\_existing\_s3\_bucket) | Whether to use an existing S3 bucket or create a new one. Regardless, `s3_bucket_name` must contain the name of the bucket. | `bool` | n/a | yes |
 | <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | Name of the S3 bucket into which CUR will put the cost data. | `string` | n/a | yes |
+| <a name="input_report_name"></a> [report\_name](#input\_report\_name) | Name of the Cost and Usage Report which will be created. | `string` | n/a | yes |
+| <a name="input_report_frequency"></a> [report\_frequency](#input\_report\_frequency) | How often the Cost and Usage Report will be generated. HOURLY or DAILY. | `string` | n/a | yes |
+| <a name="input_report_versioning"></a> [report\_versioning](#input\_report\_versioning) | Whether reports should be overwritten or new ones should be created. | `string` | n/a | yes |
+| <a name="input_report_format"></a> [report\_format](#input\_report\_format) | Format for report. Valid values are: textORcsv, Parquet. If Parquet is used, then Compression must also be Parquet. | `string` | n/a | yes |
+| <a name="input_report_compression"></a> [report\_compression](#input\_report\_compression) | Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet. | `string` | n/a | yes |
+| <a name="input_report_additional_artifacts"></a> [report\_additional\_artifacts](#input\_report\_additional\_artifacts) | A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional\_artifacts, no other artifact type can be declared and report\_versioning must be OVERWRITE\_REPORT. | `set(string)` | n/a | yes |
+| <a name="input_s3_bucket_prefix"></a> [s3\_bucket\_prefix](#input\_s3\_bucket\_prefix) | Prefix in the S3 bucket to put reports. | `string` | `""` | no |
+| <a name="input_cur_role_arn"></a> [cur\_role\_arn](#input\_cur\_role\_arn) | ARN of the role to assume in order to provision the Cost and Usage Reports S3 bucket in us-east-1. | `string` | `""` | no |
+| <a name="input_cur_role_session_name"></a> [cur\_role\_session\_name](#input\_cur\_role\_session\_name) | Session name to use when assuming `cur_role_arn`. | `string` | `""` | no |
+| <a name="input_lambda_log_group_retention_days"></a> [lambda\_log\_group\_retention\_days](#input\_lambda\_log\_group\_retention\_days) | Number of days to retain logs from the Lambda function, which ensures Glue Crawler runs when new CUR data is available. | `number` | `14` | no |
+| <a name="input_glue_crawler_create_log_group"></a> [glue\_crawler\_create\_log\_group](#input\_glue\_crawler\_create\_log\_group) | Whether to create a CloudWatch Log Group for the Glue Crawler. Crawlers share Log Group, and this gives the option of managing the Log Group with retention through this module. | `bool` | `true` | no |
+| <a name="input_glue_crawler_log_group_retention_days"></a> [glue\_crawler\_log\_group\_retention\_days](#input\_glue\_crawler\_log\_group\_retention\_days) | Number of days to retain logs from the Glue Crawler, which populates the Athena table whenever new CUR data is available. | `number` | `14` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags which will be applied to provisioned resources. | `map(string)` | `{}` | no |
 
 ## Outputs
