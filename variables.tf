@@ -8,6 +8,17 @@ variable "s3_bucket_name" {
   type        = string
 }
 
+variable "s3_use_existing_kms_key" {
+  description = "Whether to use an existing KMS CMK for S3 SSE."
+  type        = bool
+}
+
+variable "s3_kms_key_alias" {
+  description = "Alias for the KMS CMK, existing or otherwise."
+  type        = string
+  default     = ""
+}
+
 variable "report_name" {
   description = "Name of the Cost and Usage Report which will be created."
   type        = string

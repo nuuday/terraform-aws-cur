@@ -25,7 +25,28 @@ data "aws_s3_bucket" "cur" {
 }
 
 data "aws_kms_key" "s3" {
-  key_id = "alias/aws/s3"
+  key_id = "alias/${trimprefix(var.s3_kms_key_alias, "alias/")}"
+
+  depends_on = [
+    aws_kms_key.s3,
+    aws_kms_alias.s3,
+  ]
+}
+
+# tfsec:ignore:AWS019 (disable auto-rotation for now)
+resource "aws_kms_key" "s3" {
+  count = var.s3_use_existing_kms_key ? 0 : 1
+
+  description = "For server-side encryption in the '${var.s3_bucket_name}' S3 bucket."
+
+  tags = var.tags
+}
+
+resource "aws_kms_alias" "s3" {
+  count = var.s3_use_existing_kms_key ? 0 : 1
+
+  name          = "alias/${trimprefix(var.s3_kms_key_alias, "alias/")}"
+  target_key_id = aws_kms_key.s3[0].key_id
 }
 
 # Versioning and logging disabled.
@@ -43,7 +64,8 @@ resource "aws_s3_bucket" "cur" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "aws:kms"
+        kms_master_key_id = data.aws_kms_key.s3.arn
+        sse_algorithm     = "aws:kms"
       }
     }
   }
