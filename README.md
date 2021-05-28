@@ -51,7 +51,18 @@ The overall architecture looks like the illustration below
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_s3_bucket_name"></a> [s3\_bucket\_name](#output\_s3\_bucket\_name) | Name of S3 bucket used for storing CUR data. This may be provisioned by this module or not. |
+| <a name="output_s3_bucket_prefix"></a> [s3\_bucket\_prefix](#output\_s3\_bucket\_prefix) | Prefix used for storing CUR data inside the S3 bucket. |
+| <a name="output_s3_bucket_arn"></a> [s3\_bucket\_arn](#output\_s3\_bucket\_arn) | ARN of S3 bucket used for storing CUR data. This may be provisioned by this module or not. |
+| <a name="output_s3_bucket_region"></a> [s3\_bucket\_region](#output\_s3\_bucket\_region) | Region where the S3 bucket used for storing CUR data is provisioned. This may be provisioned by this module or not. |
+| <a name="output_report_name"></a> [report\_name](#output\_report\_name) | Name of the provisioned Cost and Usage Report. |
+| <a name="output_lambda_crawler_trigger_arn"></a> [lambda\_crawler\_trigger\_arn](#output\_lambda\_crawler\_trigger\_arn) | ARN of the Lambda function responsible for triggering the Glue Crawler when new CUR data is uploaded into the S3 bucket. |
+| <a name="output_lambda_crawler_trigger_role_arn"></a> [lambda\_crawler\_trigger\_role\_arn](#output\_lambda\_crawler\_trigger\_role\_arn) | ARN of the IAM role used by the Lambda function responsible for starting the Glue Crawler. |
+| <a name="output_crawler_arn"></a> [crawler\_arn](#output\_crawler\_arn) | ARN of the Glue Crawler responsible for populating the Catalog Database with new CUR data. |
+| <a name="output_crawler_role_arn"></a> [crawler\_role\_arn](#output\_crawler\_role\_arn) | ARN of the IAM role used by the Glue Crawler responsible for populating the Catalog Database with new CUR data. |
+| <a name="output_glue_catalog_database_name"></a> [glue\_catalog\_database\_name](#output\_glue\_catalog\_database\_name) | Name of the Glue Catalog Database which is populated with CUR data. |
 
 <!--- END_TF_DOCS --->
 
