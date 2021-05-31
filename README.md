@@ -26,8 +26,8 @@ The overall architecture looks like the illustration below
 | Name | Version |
 |------|---------|
 | <a name="provider_aws.cur"></a> [aws.cur](#provider\_aws.cur) | ~> 3.29 |
-| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.29 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
 
 ## Inputs
 
