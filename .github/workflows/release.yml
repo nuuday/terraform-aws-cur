@@ -26,3 +26,10 @@ jobs:
         git-push-user-name: cle-robot
         git-push-user-email: 77749875+cle-robot@users.noreply.github.com
         git-commit-message: "chore: update module docs [skip ci]"
+
+    - name: Create release
+      uses: GoogleCloudPlatform/release-please-action@v2
+      with:
+        token: ${{ secrets.ROBOT_GITHUB_TOKEN }}
+        release-type: terraform-module
+        changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Fixes","hidden":false},{"type":"improvement","section":"Improvements","hidden":false}]'
