@@ -17,6 +17,7 @@ resource "aws_s3_bucket_notification" "cur" {
   depends_on = [
     aws_s3_bucket.cur,
     aws_lambda_permission.allow_bucket,
+    aws_s3_bucket_policy.cur,
   ]
 }
 

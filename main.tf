@@ -67,6 +67,8 @@ resource "aws_s3_bucket_policy" "cur" {
 
   bucket = aws_s3_bucket.cur[0].id
   policy = data.aws_iam_policy_document.s3_cur[0].json
+
+  depends_on = [aws_s3_bucket_public_access_block.cur]
 }
 
 data "aws_iam_policy_document" "s3_cur" {
