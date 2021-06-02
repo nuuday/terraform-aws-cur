@@ -5,9 +5,13 @@ terraform {
 module "this" {
   source = "../../"
 
-  use_existing_s3_bucket = true
-  s3_bucket_name         = "nuuday-cost-usage-reports"
-  s3_bucket_prefix       = "reports"
+
+
+  use_existing_s3_bucket  = true
+  s3_bucket_name          = "nuuday-cost-usage-reports"
+  s3_bucket_prefix        = "reports"
+  s3_use_existing_kms_key = true
+  s3_kms_key_alias        = "aws/s3"
 
   report_name      = "example"
   report_frequency = "HOURLY"
