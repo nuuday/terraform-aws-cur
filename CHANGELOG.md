@@ -1,5 +1,17 @@
 # Changelog
 
+### [0.1.1](https://www.github.com/nuuday/terraform-aws-cur/compare/v0.1.0...v0.1.1) (2021-06-02)
+
+
+### Fixes
+
+* prevent conflicting operations on creating S3 resources ([#22](https://www.github.com/nuuday/terraform-aws-cur/issues/22)) ([1a99651](https://www.github.com/nuuday/terraform-aws-cur/commit/1a99651a4259451cdc830633159e3f9cb12b3be1))
+
+
+### Improvements
+
+* optionally use KMS CMK for S3 SSE ([#24](https://www.github.com/nuuday/terraform-aws-cur/issues/24)) ([6cdc902](https://www.github.com/nuuday/terraform-aws-cur/commit/6cdc902dc19836665239f958883347f657d157e7))
+
 ## 0.1.0 (2021-05-31)
 
 
