@@ -26,8 +26,8 @@ The overall architecture looks like the illustration below
 | Name | Version |
 |------|---------|
 | <a name="provider_aws.cur"></a> [aws.cur](#provider\_aws.cur) | ~> 3.29 |
-| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.29 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
 
 ## Inputs
 
@@ -35,6 +35,8 @@ The overall architecture looks like the illustration below
 |------|-------------|------|---------|:--------:|
 | <a name="input_use_existing_s3_bucket"></a> [use\_existing\_s3\_bucket](#input\_use\_existing\_s3\_bucket) | Whether to use an existing S3 bucket or create a new one. Regardless, `s3_bucket_name` must contain the name of the bucket. | `bool` | n/a | yes |
 | <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | Name of the S3 bucket into which CUR will put the cost data. | `string` | n/a | yes |
+| <a name="input_s3_use_existing_kms_key"></a> [s3\_use\_existing\_kms\_key](#input\_s3\_use\_existing\_kms\_key) | Whether to use an existing KMS CMK for S3 SSE. | `bool` | n/a | yes |
+| <a name="input_s3_kms_key_alias"></a> [s3\_kms\_key\_alias](#input\_s3\_kms\_key\_alias) | Alias for the KMS CMK, existing or otherwise. | `string` | `""` | no |
 | <a name="input_report_name"></a> [report\_name](#input\_report\_name) | Name of the Cost and Usage Report which will be created. | `string` | n/a | yes |
 | <a name="input_report_frequency"></a> [report\_frequency](#input\_report\_frequency) | How often the Cost and Usage Report will be generated. HOURLY or DAILY. | `string` | n/a | yes |
 | <a name="input_report_versioning"></a> [report\_versioning](#input\_report\_versioning) | Whether reports should be overwritten or new ones should be created. | `string` | n/a | yes |
