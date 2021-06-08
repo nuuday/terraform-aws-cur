@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.13, < 0.16"
+  required_version = ">= 0.13, < 2.0"
 }
 
 module "this" {
