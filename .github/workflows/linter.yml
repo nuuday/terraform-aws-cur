@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        terraform: ['~0.13.0', '~0.14.0', '~0.15.0']
+        terraform: ['~0.13.0', '~0.14.0', '~0.15.0', '~1.0.0']
 
     steps:
     - name: Checkout
