@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.2](https://www.github.com/nuuday/terraform-aws-cur/compare/v0.1.1...v0.1.2) (2021-06-08)
+
+
+### Improvements
+
+* support Terraform 1.0 ([#25](https://www.github.com/nuuday/terraform-aws-cur/issues/25)) ([f389ffd](https://www.github.com/nuuday/terraform-aws-cur/commit/f389ffd3b72b85838c788447d7517fa33d554d31))
+
 ### [0.1.1](https://www.github.com/nuuday/terraform-aws-cur/compare/v0.1.0...v0.1.1) (2021-06-02)
 
 
