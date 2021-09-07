@@ -45,3 +45,4 @@
     WHERE (("line_item_line_item_type" = 'DiscountedUsage') OR ("line_item_line_item_type" = 'SavingsPlanCoveredUsage'))
 
  )  b ON (("a"."ri_sp_arn_mapping" = "b"."ri_sp_arn_mapping") AND ("a"."billing_period_mapping" = "b"."billing_period_mapping") AND ("a"."payer_account_id_mapping" = "b"."payer_account_id_mapping")))
+

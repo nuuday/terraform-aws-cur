@@ -73,6 +73,11 @@ variable "lambda_log_group_retention_days" {
   default     = 14
 }
 
+variable "glue_destination_table" {
+  description = "Name of the Glue Table to store crawled data and update schema in. Currently, this has to be guessed based on Glue Crawler naming conventions, which results in the table being created by the Crawler automatically. In a later version, this module will create the table and reference it directly by its name."
+  type        = string
+}
+
 variable "glue_crawler_create_log_group" {
   description = "Whether to create a CloudWatch Log Group for the Glue Crawler. Crawlers share Log Group, and this gives the option of managing the Log Group with retention through this module."
   type        = bool
@@ -83,6 +88,29 @@ variable "glue_crawler_log_group_retention_days" {
   description = "Number of days to retain logs from the Glue Crawler, which populates the Athena table whenever new CUR data is available."
   type        = number
   default     = 14
+}
+
+variable "quicksight_cudos_dashboard_id" {
+  description = "ID which will be given to the deployed CUDOS dashboard. Used for internal reference when describing or updating the dashboard."
+  type        = string
+  default     = "cudos"
+}
+
+variable "quicksight_user_arn" {
+  description = "Principal ARN to stich onto the data sets and dashboards. Not sure why this is needed but suspect the principal will be the owner of the provisioned QuickSight resources."
+  type        = string
+}
+
+variable "quicksight_dashboard_source_account_id" {
+  description = "Account ID from which the dashboard templates will be fetched from. The default value is the AWS account documented in https://cudos.workshop.aws/workshop.html"
+  type        = string
+  default     = "223485597511"
+}
+
+variable "quicksight_dashboard_cudos_source_template_id" {
+  description = "Dashboard template ID from which the CUDOS dashboard template will be fetched from. The default value is the identifier documented in https://cudos.workshop.aws/workshop.html"
+  type        = string
+  default     = "cudos_dashboard_v3"
 }
 
 variable "tags" {

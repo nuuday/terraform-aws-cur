@@ -22,3 +22,4 @@
  ${athena_cur_table_name}
  WHERE (((("bill_billing_period_start_date" >= ("date_trunc"('month', current_timestamp) - INTERVAL  '3' MONTH)) AND ("line_item_usage_start_date" < ("date_trunc"('day', current_timestamp) - INTERVAL  '1' DAY))) AND ("line_item_operation" LIKE '%Storage%')) AND (("line_item_product_code" LIKE '%AmazonGlacier%') OR ("line_item_product_code" LIKE '%AmazonS3%')))
  GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12
+
