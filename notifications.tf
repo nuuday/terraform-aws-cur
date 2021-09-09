@@ -2,8 +2,6 @@ locals {
   lambda_function_name = "${var.report_name}-crawler-trigger"
 }
 
-data "aws_caller_identity" "current" {}
-
 resource "aws_s3_bucket_notification" "cur" {
   bucket = var.s3_bucket_name
 
@@ -93,7 +91,7 @@ data "aws_iam_policy_document" "crawler_trigger" {
       "logs:PutLogEvents",
     ]
 
-    resources = ["*"]
+    resources = ["${aws_cloudwatch_log_group.lambda.arn}:*"]
   }
 
   statement {
