@@ -22,4 +22,8 @@ module "this" {
   report_format      = "Parquet"
   report_compression = "Parquet"
   report_versioning  = "OVERWRITE_REPORT"
+
+  glue_destination_table = "nuuday_hourly"
+  
+  quicksight_user_arn = "arn:aws:quicksight:eu-central-1:985196426381:user/default/quicksight-admin/foo"
 }
