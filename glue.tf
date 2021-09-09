@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "crawler" {
       "kms:Encrypt",
     ]
 
-    resources = [data.aws_kms_key.s3.arn]
+    resources = [var.s3_use_existing_kms_key ? data.aws_kms_key.s3[0].arn : aws_kms_key.s3[0].arn]
   }
 
   statement {

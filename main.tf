@@ -25,12 +25,9 @@ data "aws_s3_bucket" "cur" {
 }
 
 data "aws_kms_key" "s3" {
-  key_id = "alias/${trimprefix(var.s3_kms_key_alias, "alias/")}"
+  count = var.s3_use_existing_kms_key ? 1 : 0
 
-  depends_on = [
-    aws_kms_key.s3,
-    aws_kms_alias.s3,
-  ]
+  key_id = "alias/${trimprefix(var.s3_kms_key_alias, "alias/")}"
 }
 
 # tfsec:ignore:AWS019 (disable auto-rotation for now)
@@ -64,7 +61,7 @@ resource "aws_s3_bucket" "cur" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = data.aws_kms_key.s3.arn
+        kms_master_key_id = var.s3_use_existing_kms_key ? data.aws_kms_key.s3[0].arn : aws_kms_key.s3[0].arn
         sse_algorithm     = "aws:kms"
       }
     }
