@@ -1,3 +1,8 @@
+locals {
+  # This is defined by AWS.
+  glue_log_group_default_name = "/aws-glue/crawlers"
+}
+
 # Provisions Glue Crawler and Catalog Database.
 # Crawler will, when run, populate the Catalog Database with a table representing the CUR data in S3.
 
@@ -31,15 +36,6 @@ resource "aws_iam_role" "crawler" {
 resource "aws_iam_role_policy" "crawler" {
   role   = aws_iam_role.crawler.name
   policy = data.aws_iam_policy_document.crawler.json
-}
-
-resource "aws_iam_role_policy_attachment" "crawler" {
-  role       = aws_iam_role.crawler.name
-  policy_arn = data.aws_iam_policy.crawler.arn
-}
-
-data "aws_iam_policy" "crawler" {
-  name = "AWSGlueServiceRole"
 }
 
 data "aws_iam_policy_document" "crawler_assume" {
@@ -77,13 +73,20 @@ data "aws_iam_policy_document" "crawler" {
 
     actions = [
       "glue:ImportCatalogToGlue",
+      "glue:GetDatabase",
       "glue:UpdateDatabase",
+      "glue:GetTable",
       "glue:CreateTable",
       "glue:UpdateTable",
+      "glue:BatchGetPartition",
       "glue:UpdatePartition",
     ]
 
-    resources = ["*"]
+    resources = [
+      aws_glue_catalog_database.cur.arn,
+      "arn:${data.aws_partition.current.partition}:glue:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:catalog",
+      "arn:${data.aws_partition.current.partition}:glue:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${aws_glue_catalog_database.cur.name}/*",
+    ]
   }
 
   statement {
@@ -97,7 +100,10 @@ data "aws_iam_policy_document" "crawler" {
       "logs:PutLogEvents",
     ]
 
-    resources = ["*"]
+    resources = [
+      "arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:${local.glue_log_group_default_name}",
+      "arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:${local.glue_log_group_default_name}:log-stream:*",
+    ]
   }
 
   statement {
@@ -106,12 +112,13 @@ data "aws_iam_policy_document" "crawler" {
     effect = "Allow"
 
     actions = [
-      "s3:PutObject",
       "s3:GetObject",
+      "s3:ListBucket",
     ]
 
     resources = [
-      "${var.use_existing_s3_bucket ? data.aws_s3_bucket.cur[0].arn : aws_s3_bucket.cur[0].arn}/${var.s3_bucket_prefix}/*"
+      "${var.use_existing_s3_bucket ? data.aws_s3_bucket.cur[0].arn : aws_s3_bucket.cur[0].arn}",
+      "${var.use_existing_s3_bucket ? data.aws_s3_bucket.cur[0].arn : aws_s3_bucket.cur[0].arn}/*",
     ]
   }
 }
@@ -128,6 +135,6 @@ data "aws_iam_policy_document" "crawler" {
 resource "aws_cloudwatch_log_group" "crawler" {
   count = var.glue_crawler_create_log_group ? 1 : 0
 
-  name              = "/aws-glue/crawlers"
+  name              = local.glue_log_group_default_name
   retention_in_days = var.glue_crawler_log_group_retention_days
 }
