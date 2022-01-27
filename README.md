@@ -88,8 +88,8 @@ For more information about Cost & Usage Reports in general, see [AWS: What are C
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.29 |
 | <a name="provider_aws.cur"></a> [aws.cur](#provider\_aws.cur) | ~> 3.29 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.29 |
 | <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
 
 ## Inputs
