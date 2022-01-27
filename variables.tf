@@ -64,7 +64,7 @@ variable "cur_role_arn" {
 variable "cur_role_session_name" {
   description = "Session name to use when assuming `cur_role_arn`."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "lambda_log_group_retention_days" {
