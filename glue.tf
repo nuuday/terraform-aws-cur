@@ -80,6 +80,7 @@ data "aws_iam_policy_document" "crawler" {
       "glue:UpdateTable",
       "glue:BatchGetPartition",
       "glue:UpdatePartition",
+      "glue:BatchCreatePartition",
     ]
 
     resources = [
